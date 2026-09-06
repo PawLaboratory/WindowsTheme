@@ -1,8 +1,33 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <RootNamespace>WindowsTheme</RootNamespace>
-	<TargetFrameworks>net462;net6.0-windows;net8.0-windows</TargetFrameworks>
+    <RootNamespace>PawLab.WindowsTheme</RootNamespace>
+	<TargetFrameworks>net462;net6.0-windows;net8.0-windows;net472</TargetFrameworks>
+	<GenerateDocumentationFile>True</GenerateDocumentationFile>
+	<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	<PackageId>PawLab.WindowsTheme</PackageId>
+	<Title>PawLab.WindowsTheme</Title>
+	<Company>PawLaboratory</Company>
+	<AssemblyName>PawLab.WindowsTheme</AssemblyName>
+	<AutoGenerateBindingRedirects>True</AutoGenerateBindingRedirects>
+	<Version>1.0.0</Version>
+	<Authors>xionglongztz</Authors>
+	<Description>A library for Windows Theme Service</Description>
+	<PackageReadmeFile>README.md</PackageReadmeFile>
+	<RepositoryUrl>https://github.com/PawLaboratory/WindowsTheme</RepositoryUrl>
+	<PackageTags>theme; windows; darkmode; lightmode; vbnet; dotnet;</PackageTags>
+	<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include=".github\workflows\nuget.yml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>

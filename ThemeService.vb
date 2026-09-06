@@ -13,8 +13,8 @@
 ' See the License for the specific language governing permissions and
 ' limitations under the License.
 Imports System.Runtime.InteropServices
-Imports WindowsTheme.WinAPI
-Imports WindowsTheme.Utilities
+Imports PawLab.WindowsTheme.WinAPI
+Imports PawLab.WindowsTheme.Utilities
 
 Public NotInheritable Class ThemeService
 
