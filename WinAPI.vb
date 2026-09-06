@@ -21,11 +21,6 @@ Friend Class WinAPI
     Public Shared Function SetPreferredAppMode(ByVal PreferredAppMode As PreferredAppMode) As Long
         '修改菜单颜色
     End Function
-    'SetWindowTheme函数 - 设置特定窗口的主题
-    <DllImport("uxtheme.dll", EntryPoint:="#135", SetLastError:=True, CharSet:=CharSet.Unicode)>
-    Public Shared Function SetWindowTheme(ByVal hwnd As IntPtr, ByVal pszSubAppName As String, ByVal pszSubIdList As String) As Long
-        '使用主题
-    End Function
     'FlushMenuThemes函数 - 刷新菜单主题
     <DllImport("uxtheme.dll", EntryPoint:="#136", SetLastError:=True, CharSet:=CharSet.Unicode)>
     Public Shared Function FlushMenuThemes() As Long
@@ -74,9 +69,5 @@ Friend Class WinAPI
         SystemBackdropType
         Last
     End Enum
-    'InvalidateRect 函数 - 强制重绘整个窗口
-    <DllImport("user32.dll")>
-    Public Shared Function InvalidateRect(hWnd As IntPtr, lpRect As IntPtr, bErase As Boolean) As Boolean
-    End Function
 
 End Class

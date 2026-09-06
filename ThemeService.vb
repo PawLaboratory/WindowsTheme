@@ -18,8 +18,6 @@ Imports WindowsTheme.Utilities
 
 Public NotInheritable Class ThemeService
 
-#Region "实用工具"
-
     ''' <summary>
     ''' 私有构造函数, 避免被实例化
     ''' </summary>
@@ -63,15 +61,15 @@ Public NotInheritable Class ThemeService
         DwmSetWindowAttribute(hwnd, DwmWindowAttribute.TextColor, textColor, Marshal.SizeOf(Of Integer)())
     End Sub
 
-#End Region
-
-    ' 启动监听（注入到主窗体的 WndProc，或单独启动消息泵）
-    Public Shared Sub StartListening()
+    ''' <summary>
+    ''' 设置指定窗口主题
+    ''' </summary>
+    ''' <param name="hwnd">窗口句柄</param>
+    ''' <param name="isDarkMode">是否设置为深色模式, 若是, 则为 True, 默认为 False</param>
+    Public Shared Sub SetWindowTheme(hwnd As IntPtr, Optional isDarkMode As Boolean = False)
+        DwmSetWindowAttribute(hwnd, DwmWindowAttribute.UseImmersiveDarkMode, isDarkMode, Marshal.SizeOf(Of Integer))
+        SetPreferredAppMode(If(isDarkMode, PreferredAppMode.ForceDark, PreferredAppMode.ForceLight))
+        FlushMenuThemes()
     End Sub
-
-    ' 主动刷新所有窗体
-    Public Shared Sub UpdateAllForms()
-    End Sub
-
 
 End Class
