@@ -15,8 +15,7 @@
 
 Friend Class Utilities
     Public Shared Function RGBToCOLORREF(ByVal r As Byte, ByVal g As Byte, ByVal b As Byte) As Integer
-        '0x00BBGGRR
-        Return CInt(b) << 16 Or CInt(g) << 8 Or CInt(r)
+        Return CInt(b) << 16 Or CInt(g) << 8 Or CInt(r) '0x00BBGGRR
     End Function
     Public Shared Function GetForeColor(ByVal r As Byte, ByVal g As Byte, ByVal b As Byte) As Boolean
         Dim brightness As Double = (0.299 * r + 0.587 * g + 0.114 * b)
