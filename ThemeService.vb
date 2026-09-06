@@ -1,4 +1,4 @@
-' WindowsTheme - A library for Windows Theme Service
+ï»¿' WindowsTheme - A library for Windows Theme Service
 ' Copyright 2026 xionglongztz/PawLaboratory
 '
 ' Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,15 +19,15 @@ Imports PawLab.WindowsTheme.Utilities
 Public NotInheritable Class ThemeService
 
     ''' <summary>
-    ''' Ë½ÓĞ¹¹Ôìº¯Êı, ±ÜÃâ±»ÊµÀı»¯
+    ''' ç§æœ‰æ„é€ å‡½æ•°, é¿å…è¢«å®ä¾‹åŒ–
     ''' </summary>
     Private Sub New()
     End Sub
 
     ''' <summary>
-    ''' ÅĞ¶Ïµ±Ç°Éè¶¨Ó¦ÓÃÖ÷ÌâÊÇ·ñÎªÉîÉ«Ä£Ê½
+    ''' åˆ¤æ–­å½“å‰è®¾å®šåº”ç”¨ä¸»é¢˜æ˜¯å¦ä¸ºæ·±è‰²æ¨¡å¼
     ''' </summary>
-    ''' <returns>ÈôÊÇ, Ôò·µ»Ø True, ·ñÔò·µ»Ø False</returns>
+    ''' <returns>è‹¥æ˜¯, åˆ™è¿”å› True, å¦åˆ™è¿”å› False</returns>
     Public Shared Function IsAppDarkMode() As Boolean
         Using regKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", True)
             Return regKey.GetValue("AppsUseLightTheme", "1") = 0
@@ -35,9 +35,9 @@ Public NotInheritable Class ThemeService
     End Function
 
     ''' <summary>
-    ''' ÅĞ¶Ïµ±Ç°Éè¶¨ÏµÍ³Ö÷ÌâÊÇ·ñÎªÉîÉ«Ä£Ê½
+    ''' åˆ¤æ–­å½“å‰è®¾å®šç³»ç»Ÿä¸»é¢˜æ˜¯å¦ä¸ºæ·±è‰²æ¨¡å¼
     ''' </summary>
-    ''' <returns>ÈôÊÇ, Ôò·µ»Ø True, ·ñÔò·µ»Ø False</returns>
+    ''' <returns>è‹¥æ˜¯, åˆ™è¿”å› True, å¦åˆ™è¿”å› False</returns>
     Public Shared Function IsSystemDarkMode() As Boolean
         Using regKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize", True)
             Return regKey.GetValue("SystemUsesLightTheme", "1") = 0
@@ -45,27 +45,27 @@ Public NotInheritable Class ThemeService
     End Function
 
     ''' <summary>
-    ''' ÉèÖÃ±êÌâÀ¸ÑÕÉ«(½ö Windows 11 ¼°ÒÔÉÏÉúĞ§)
+    ''' è®¾ç½®æ ‡é¢˜æ é¢œè‰²(ä»… Windows 11 åŠä»¥ä¸Šç”Ÿæ•ˆ)
     ''' </summary>
-    ''' <param name="hwnd">´°¿Ú¾ä±ú</param>
-    ''' <param name="r">ºìÉ«Öµ( 0 ÖÁ 255 )</param>
-    ''' <param name="g">ÂÌÉ«Öµ( 0 ÖÁ 255 )</param>
-    ''' <param name="b">À¶É«Öµ( 0 ÖÁ 255 )</param>
+    ''' <param name="hwnd">çª—å£å¥æŸ„</param>
+    ''' <param name="r">çº¢è‰²å€¼( 0 è‡³ 255 )</param>
+    ''' <param name="g">ç»¿è‰²å€¼( 0 è‡³ 255 )</param>
+    ''' <param name="b">è“è‰²å€¼( 0 è‡³ 255 )</param>
     Public Shared Sub SetTitleBarColor(ByVal hwnd As IntPtr, ByVal r As Byte, ByVal g As Byte, ByVal b As Byte)
-        'ÉèÖÃ±êÌâÀ¸Óë±ß¿ò±³¾°É«
+        'è®¾ç½®æ ‡é¢˜æ ä¸è¾¹æ¡†èƒŒæ™¯è‰²
         Dim colorRef As Integer = RGBToCOLORREF(r, g, b)
         DwmSetWindowAttribute(hwnd, DwmWindowAttribute.CaptionColor, colorRef, Marshal.SizeOf(Of Integer)())
         DwmSetWindowAttribute(hwnd, DwmWindowAttribute.BorderColor, colorRef, Marshal.SizeOf(Of Integer)())
-        '¸ù¾İ±³¾°ÁÁ¶È¾ö¶¨ÎÄ×ÖÑÕÉ«
+        'æ ¹æ®èƒŒæ™¯äº®åº¦å†³å®šæ–‡å­—é¢œè‰²
         Dim textColor As Integer = If(GetForeColor(r, g, b), RGBToCOLORREF(0, 0, 0), RGBToCOLORREF(255, 255, 255))
         DwmSetWindowAttribute(hwnd, DwmWindowAttribute.TextColor, textColor, Marshal.SizeOf(Of Integer)())
     End Sub
 
     ''' <summary>
-    ''' ÉèÖÃÖ¸¶¨´°¿ÚÖ÷Ìâ
+    ''' è®¾ç½®æŒ‡å®šçª—å£ä¸»é¢˜
     ''' </summary>
-    ''' <param name="hwnd">´°¿Ú¾ä±ú</param>
-    ''' <param name="isDarkMode">ÊÇ·ñÉèÖÃÎªÉîÉ«Ä£Ê½, ÈôÊÇ, ÔòÎª True, Ä¬ÈÏÎª False</param>
+    ''' <param name="hwnd">çª—å£å¥æŸ„</param>
+    ''' <param name="isDarkMode">æ˜¯å¦è®¾ç½®ä¸ºæ·±è‰²æ¨¡å¼, è‹¥æ˜¯, åˆ™ä¸º True, é»˜è®¤ä¸º False</param>
     Public Shared Sub SetWindowTheme(hwnd As IntPtr, Optional isDarkMode As Boolean = False)
         DwmSetWindowAttribute(hwnd, DwmWindowAttribute.UseImmersiveDarkMode, isDarkMode, Marshal.SizeOf(Of Integer))
         SetPreferredAppMode(If(isDarkMode, PreferredAppMode.ForceDark, PreferredAppMode.ForceLight))
